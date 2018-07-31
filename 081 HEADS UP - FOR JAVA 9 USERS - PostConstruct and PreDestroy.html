@@ -1,0 +1,125 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>081 HEADS UP - FOR JAVA 9 USERS - PostConstruct and PreDestroy</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p><strong>HEADS UP - FOR JAVA 9 USERS - @PostConstruct and @PreDestroy
+
+<br></strong></p>
+
+<p><strong></strong>If you are using Java 9, then you will encounter an error when using @PostConstruct and @PreDestroy in your code.
+
+</p>
+
+
+
+
+
+
+
+<p>These are the steps to resolve it. Come back to the lecture if you hit the error.</p>
+
+
+
+
+
+
+
+<p><em><strong>Error</strong></em></p><p><em><strong></strong></em>Eclipse is unable to import @PostConstruct or @PreDestroy</p>
+
+
+
+
+
+
+
+<p>This happens because of Java 9. Java 9 has removed javax.annotation from its default classpath. That's why we Eclipse can't find it.</p>
+
+
+
+
+
+<p>---<br></p>
+
+
+
+
+
+
+
+
+
+<p><em><strong>Solution</strong></em></p><p><em><strong></strong></em>1. Download the <em>javax.annotation-api-1.2.jar</em> from</p>
+
+
+
+<p><a href="http://central.maven.org/maven2/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar" rel="nofollow">http://central.maven.org/maven2/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar</a></p>
+
+
+
+<p>2. Copy the JAR file to the <strong>lib</strong> folder of your project</p>
+
+
+
+<p>---<br></p>
+
+
+
+<p>Use the following steps to add it to yourJava Build Path.</p>
+
+
+
+<p>3. Right-click your project, select <strong>Properties</strong></p>
+
+
+
+
+
+<p>4. On left-hand side, click <strong>Java Build Path</strong></p>
+
+
+
+
+
+<p>5. In top-center of dialog, click <strong>Libraries</strong></p>
+
+
+
+
+
+<p>6. Click <strong>Classpath</strong> and then Click <strong>Add JARs ...</strong></p>
+
+
+
+
+
+<p>7. Navigate to the JAR file <strong>&lt;your-project&gt;/lib/javax.annotation-api-1.2.jar</strong></p>
+
+
+
+
+
+<p>8. Click <strong>OK </strong>then click <strong>Apply and Close</strong></p>
+
+
+
+
+
+<p>Eclipse will perform a rebuild of your project and it will resolve the related build errors.</p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

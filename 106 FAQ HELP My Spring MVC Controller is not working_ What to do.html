@@ -1,0 +1,372 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>106 FAQ HELP My Spring MVC Controller is not working_ What to do</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p><strong class="redactor-inline-converted">JUST A HEADS UP ... <br></strong></p>
+
+<p><strong class="redactor-inline-converted">IN THE FOLLOWING VIDEOS YOUR SPRING MVC CONTROLLER CODE MAY NOT WORK<br></strong></p>
+
+
+
+
+
+
+
+<p><strong>THIS IS AN ECLIPSE CACHING BUG</strong></p>
+
+
+
+
+
+
+
+<p><strong>IF YOUR CONTROLLER DOESN'T WORK THEN TRY THE STEPS BELOW</strong></p>
+
+
+
+
+
+
+
+<p><strong>BE SURE TO COME BACK TO THIS ARTICLE</strong></p>
+
+
+
+
+
+
+
+<p>----<br></p>
+
+
+
+
+
+
+
+<p><strong class="redactor-inline-converted">Question:
+
+</strong></p>
+
+
+
+
+
+
+
+<p>HELP! My Spring MVC Controller is not working. What to do?</p>
+
+
+
+
+
+
+
+
+
+<p><strong class="redactor-inline-converted">Answer</strong></p>
+
+
+
+
+
+
+
+
+
+<p><em><strong></strong></em></p>
+
+
+
+<p><em><strong></strong></em></p>
+
+<p><em><strong>Debug Tip #0: Make sure you are accessing the correct URL</strong></em></p>
+
+
+
+
+
+<p>You need to access the correct URL,localhost:8080/spring-mvc-demo/</p>
+
+<p>Note: Do not attempt to run the JSP files directly. This will not work due to MVC.<br></p>
+
+<p><strong><em></em></strong><br></p><p>---</p>
+
+<p><em><strong>Debug Tip #1: Make Sure your Package Names is consistent</strong></em></p>
+
+
+
+
+
+<p>The Spring configuration file used in the videos expects for your controller to be in the package: <strong></strong></p>
+
+
+
+<p><strong><em>package com.luv2code.springdemo.mvc;</em></strong></p>
+
+
+
+<p><strong><em></em></strong><em></em>Make sure your controller is this package.</p>
+
+
+
+<p><em><strong>----<br></strong></em></p>
+
+
+
+<p><em><strong>Debug Tip #2: Clear Cache<br></strong></em></p>
+
+
+
+
+
+<p><em><strong></strong></em>This is normally a caching issue with Eclipse.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>Here are some steps to clear the Eclipse cache and Tomcat cache.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>1. In the Server's tab in Eclipse, Stop the Tomcat server</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>2. Right-click the server and select "Clean..."</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>3. Right-click the server again and select "Clean Tomcat Work Directory..."</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>---</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>4. In the Eclipse, select the top-level menu option, Project &gt; Clean ...</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>5. Be sure your project is selected and click Ok</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>6. Restart Eclipse</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>Retest your application. If you continue to have problems try Debug Tip #2</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>---</p>
+
+
+
+
+
+
+
+
+
+
+
+<p><em><strong>Debug Tip #3: Import the Project in a new workspace</strong></em></p>
+
+
+
+
+
+<p><em><strong></strong></em></p>
+
+
+
+<p><em><strong></strong></em></p>
+
+<p><em><strong></strong></em></p><em><strong>
+
+</strong></em><p><em><strong></strong></em><br></p><p><em><strong></strong></em><br></p>
+
+<p><em><strong></strong></em><br></p>
+
+
+
+<p><em><strong></strong></em>1. Copy your project to a new directory on your computer like, c:\foobar</p>
+
+
+
+
+
+
+
+<p>2. In Eclipse, open a new workspace: Create a new workspace in Eclipse: File &gt; Switch Workspace &gt; Other ... &gt; give any name
+
+</p>
+
+
+
+
+
+
+
+<p>3. In Eclipse, import the project
+</p>
+
+
+
+
+
+
+
+<p>3a. Use File &gt; Import &gt; General &gt; Existing Projects into Workspace
+</p>
+
+
+
+
+
+
+
+<p>3b. Browse to directory: c:\foobar
+</p>
+
+
+
+
+
+
+
+<p>4. In your new workspace, add a reference to the Tomcat server
+</p>
+
+
+
+
+
+
+
+<p>5. Test your app in the new workspace
+</p>
+
+
+
+
+
+<p>---<br></p>
+
+
+
+
+
+<p>If you still have problems, then post your code to the classroom discussion forum.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>Be sure to include the following files:<br>- spring-mvc-demo-servlet.xml<br>- your controller .java<br>- your view page .jsp</p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

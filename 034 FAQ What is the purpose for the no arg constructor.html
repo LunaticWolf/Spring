@@ -1,0 +1,35 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>034 FAQ What is the purpose for the no arg constructor</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p><strong class="redactor-inline-converted">FAQ: What is the purpose for the no arg constructor?
+
+</strong></p>
+
+<p><br></p>
+
+<p><strong class="redactor-inline-converted">Question:<br></strong>I was wondering why you created a no arg constructor? I thought that they are implied by Java and only required when you also have an overloaded constructor. Or is this a Spring specific thing?</p>
+
+<p>---<br></p>
+
+<p><strong></strong></p><p><strong>Answered by: Oleksandr Palamarchuk</strong></p>
+
+<p>When you dont define any constructor in your class, compiler defines default one for you, however when you declare any constructor (in your example you have already defined a parameterized constructor), compiler doesnt do it for you.</p><p>Since you have defined a constructor in class code, compiler didnt create default one. While creating object you are invoking default one, which doesnt exist in class code. Then the code gives an compilation error.</p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

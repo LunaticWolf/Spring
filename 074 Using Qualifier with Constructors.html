@@ -1,0 +1,175 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>074 Using Qualifier with Constructors</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p><strong>@Qualifier</strong> is a nice feature, but it istricky when used with Constructors.</p>
+
+<p>The syntax is much different from other examples and not exactly intuitive. Consider this the "deep end of the pool" when it comes to Spring configuration LOL :-)</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>You have to place the @Qualifier annotation inside of the constructor arguments.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>Here's an example from our classroom example. I updated it to make use of constructor injection, with @Autowired and @Qualifier. Make note of the code in bold below:</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>---<br>package com.luv2code.springdemo;</p>import org.springframework.beans.factory.annotation.Autowired;<br><p>import org.springframework.beans.factory.annotation.Qualifier;<br>import org.springframework.stereotype.Component;</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>@Component<br>public class TennisCoach implements Coach {</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>  private FortuneService fortuneService;</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>  // define a default constructor<br>  public TennisCoach() {<br>    System.out.println("&gt;&gt; TennisCoach: inside default constructor");<br>  }<br> <br><strong class="redactor-inline-converted">  @Autowired<br>  public TennisCoach(@Qualifier("randomFortuneService") FortuneService theFortuneService) {</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+<p><strong class="redactor-inline-converted">    System.out.println("&gt;&gt; TennisCoach: inside constructor using @autowired and @qualifier");<br>   <br>    fortuneService = theFortuneService;<br>  }<br></strong>   <br> <br>  /*<br>  @Autowired<br>  public void doSomeCrazyStuff(FortuneService theFortuneService) {<br>    System.out.println("&gt;&gt; TennisCoach: inside doSomeCrazyStuff() method");<br>    fortuneService = theFortuneService;<br>  }<br>  */<br> <br>  /*<br>  @Autowired<br>  public TennisCoach(FortuneService theFortuneService) {<br>    fortuneService = theFortuneService;<br>  }<br>  */<br> <br>  @Override<br>  public String getDailyWorkout() {<br>    return "Practice your backhand volley";<br>  }</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>  @Override<br>  public String getDailyFortune() {<br>    return fortuneService.getFortune();<br>  }</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>}</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>---</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>For detailed documentation on using @Qualified with Constructors, see this link in the Spring Reference Manual</p>
+
+
+
+
+
+
+
+
+
+
+
+<p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-autowired-annotation-qualifiers" rel="nofollow">https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-autowired-annotation-qualifiers</a><br></p>
+
+
+
+
+
+<p><br><a href="http://docs.spring.io/spring/docs/4.3.1.RELEASE/spring-framework-reference/html/beans.html#beans-autowired-annotation-qualifiers" rel="nofollow" target="_blank"></a></p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

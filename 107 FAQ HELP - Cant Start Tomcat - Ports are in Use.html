@@ -1,0 +1,130 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>107 FAQ HELP - Cant Start Tomcat - Ports are in Use</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p><strong class="redactor-inline-converted">Can't Start Tomcat - Ports are in Use</strong></p>
+
+<p>You may have a problem starting Tomcat.You may see this ugly error message about ports in use.</p>
+
+
+
+
+
+<figure><img src="https://udemy-images.s3.amazonaws.com:443/redactor/2016-09-16_17-54-38-d8e914f7a8f5d9ac131cba4bb32d0f27/tomcat-ports-blocked.png"></figure>
+
+
+
+
+
+<p><br></p>
+
+
+
+
+
+
+
+<p><strong>Solution</strong></p><p>You can use the troubleshooting tips below.</p><p><em><strong>Troubleshooting Tip #1</strong></em></p><em><strong></strong></em><p><em><strong></strong></em>1. Exit Eclipse<br></p>
+
+
+
+
+
+
+
+<p>2. Open a web web browser and visit, http://localhost:8080</p>
+
+
+
+
+
+
+
+
+
+<p>3. If you see a "Tomcat" web page then that means Tomcat is running as a Windows service.To stop Tomcat running as a Windows services, open your Windows Control Panel. Find the service "Apache Tomcat" and stop it.</p>
+
+
+
+
+
+
+
+
+
+<p>4. If you don't see a "Tomcat" web page, then stop the appropriate process displayed.</p>
+
+
+
+
+
+<p>--<br></p><p><em><strong>Troubleshooting Tip #2</strong></em></p><p><em><strong></strong></em>Steps to free port which is already used to run tomcat server in Eclipse</p>
+
+<p>For example , suppose 8080 port is used , we need to make free 8080 to run tomcat</p>
+
+
+
+
+
+<p>Step 1: (open the CMD command)</p>
+
+
+
+
+
+<p>C:\Users\username&gt;netstat -o -n -a | findstr 0.0:8080 </p>
+
+
+
+
+
+<p>TCP    0.0.0.0:3000      0.0.0.0:0              LISTENING       3116</p>
+
+
+
+
+
+<p>Now , we can see that LISTENING port is 3116 for 8080 ,</p>
+
+
+
+
+
+<p>We need to kill 3116 now</p>
+
+
+
+
+
+<p>Step 2:-</p>
+
+
+
+
+
+<p>C:\Users\username&gt;taskkill /F /PID 3116</p>
+
+
+
+
+
+<p>Step 3:
+Go to Eclipse and start Server , it will run </p><p><br></p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

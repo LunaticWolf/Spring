@@ -1,0 +1,71 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>135 FAQ How to populate radiobuttons with items from Java class</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p><strong>FAQ: How to populate radiobuttons with items from Java class like we did with selectlist?</strong></p>
+
+<p>You can follow a similar approach that we used for the drop-down list.</p>
+
+<p>Here are the steps</p>
+
+
+
+<p>1. Set up the data in your Student class</p>
+
+
+
+<p>Add a new field</p>
+
+
+
+<p> private LinkedHashMap&lt;String, String&gt; favoriteLanguageOptions;</p>
+
+
+
+<p>In your constructor, populate the data</p>
+
+
+
+<p>  // populate favorite language options<br>  favoriteLanguageOptions = new LinkedHashMap&lt;&gt;();</p>
+
+
+
+<p>  // parameter order: value, display label<br>  //<br>  favoriteLanguageOptions.put("Java", "Java");<br>  favoriteLanguageOptions.put("C#", "C#");<br>  favoriteLanguageOptions.put("PHP", "PHP");<br>  favoriteLanguageOptions.put("Ruby", "Ruby");  </p>
+
+
+
+<p>Add getter method</p>
+
+
+
+<p> public LinkedHashMap&lt;String, String&gt; getFavoriteLanguageOptions() {<br>  return favoriteLanguageOptions;<br> }</p>
+
+
+
+<p>2. Reference the data in your form</p>
+
+
+
+<p>  Favorite Language:<br>  <br>  &lt;form:radiobuttons path="favoriteLanguage" items="${student.favoriteLanguageOptions}" /&gt;</p>
+
+
+
+<p>Source code is available here:<br>- <a href="https://gist.github.com/darbyluv2code/debb69b1bf8010d84d50e0542e809ffb" rel="nofollow">https://gist.github.com/darbyluv2code/debb69b1bf8010d84d50e0542e809ffb</a></p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

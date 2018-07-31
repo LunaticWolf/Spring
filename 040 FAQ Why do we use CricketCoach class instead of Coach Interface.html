@@ -1,0 +1,201 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>040 FAQ Why do we use CricketCoach class instead of Coach Interface</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p><strong class="redactor-inline-converted">Question:</strong></p>
+
+<p>For the CricketCoach example with Setter Injection, why do we use the CricketCoach class instead of the Coach interface?</p>
+
+
+
+
+
+
+
+<p><strong>Answer:</strong><br></p>
+
+
+
+
+
+
+
+<p>The getTeam() method is only defined in the CricketCoach class. It is not part of the Coach interface.</p>
+
+
+
+
+
+
+
+
+
+<p>As a result, you would need the following code:</p>
+
+
+
+
+
+
+
+
+
+<p> <code>CricketCoach theCricketCoach = context.getBean("myCricketCoach", CricketCoach.class);</code></p>
+
+
+
+
+
+
+
+
+
+<p>---</p>
+
+
+
+
+
+
+
+
+
+<p>The Coach interface has two methods: getDailyWorkout and getDailyFortune</p>
+
+
+
+
+
+
+
+
+
+<p>The CricketCoach class has four methods: getDailyWorkout, getDailyFortune, getTeam and setTeam</p>
+
+
+
+
+
+
+
+
+
+<p>---</p>
+
+
+
+
+
+
+
+
+
+<p>When you retrieve a bean from the Spring container using the Coach interface:</p>
+
+
+
+
+
+
+
+
+
+<p> <code>Coach theCricketCoach = context.getBean("myCricketCoach", Coach.class);</code></p>
+
+
+
+
+
+
+
+
+
+<p>You only have access to the methods defined in the Coach interface: getDailyWorkout and getDailyFortune. Even though the actual implementation has additional methods, you only have visibility to methods that are defined at the Coach interface level.</p>
+
+
+
+
+
+
+
+
+
+<p>---</p>
+
+
+
+
+
+
+
+
+
+<p>When you retrieve a bean from the Spring container using the CricketCoach class:</p>
+
+
+
+
+
+
+
+
+
+<p> <code>CricketCoach theCricketCoach = context.getBean("myCricketCoach", CricketCoach.class);</code></p>
+
+
+
+
+
+
+
+
+
+<p>You have access to the methods defined in the Coach interface: getDailyWorkout and getDailyFortune. </p>
+
+
+
+
+
+
+
+
+
+<p>ALSO, you have access to the additional methods defined in the CricketCoach class: getTeam, setTeam.</p>
+
+
+
+
+
+
+
+
+
+<p>---</p>
+
+
+
+
+
+
+
+
+
+<p>The bottom line is it depends on how you retrieve the object and assign it ... that determines the visibility you have to the methods.</p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

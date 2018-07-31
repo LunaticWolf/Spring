@@ -1,0 +1,305 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>063 FAQ Constructor Injection - Autowired Optional</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p><strong>Question</strong></p>
+
+<p><strong></strong>I have finished the video "Constructor Injection - Writing Code part2". <br></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>I have commented the Autowired annotation. But still it worked. How did it work? 
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<pre class="prettyprint linenums">    //@Autowired
+    public TennisCoach(FortuneService theFortuneService) {
+        System.out.println(" theFortuneService " + theFortuneService);
+        fortuneService = theFortuneService;
+    }</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>===</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Answer</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong></strong>This is a new feature of Spring 4.3.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Here is the snippet from the Spring Docs.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><em>If the class has only one constructor defined then the @Autowired annotation is not required as of Spring 4.3+.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>I personally prefer to use the @Autowired annotation because it makes the code more readable. But as mentioned, the @Autowired is not required.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>---<br></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>See link to the docs.<br><br><a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-java-composing-configuration-classes" rel="nofollow">http://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-java-composing-configuration-classes</a></p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

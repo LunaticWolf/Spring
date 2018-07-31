@@ -1,0 +1,101 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>027 FAQ Why do we specify the Coach interface in getBean()</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p><strong>Question</strong></p>
+
+<p>Why do we specify the Coach interface in getBean()? </p>
+
+
+
+
+
+<p>For example:</p>
+
+
+
+
+
+
+
+<p><code>Coach theCoach = context.getBean("myCoach", Coach.class);</code></p>
+
+
+
+
+
+
+
+<p>---</p>
+
+
+
+
+
+<p><strong class="redactor-inline-converted">Answer</strong><br></p>
+
+
+
+
+
+
+
+<p>When we pass the interface to the method, behind the scenes Spring will cast the object for you.</p>
+
+
+
+
+
+
+
+<p><code>context.getBean("myCoach", Coach.class) </code></p>
+
+
+
+
+
+
+
+<p>However, there are some slight differences than normal casting.</p>
+
+
+
+
+
+
+
+<p>From the Spring docs:</p>
+
+
+
+
+
+
+
+<p><em>Behaves the same as getBean(String), but provides a measure of type safety by throwing a BeanNotOfRequiredTypeException if the bean is not of the required type. This means that ClassCastException can't be thrown on casting the result correctly, as can happen with getBean(String).</em></p>
+
+
+
+
+
+
+
+<p>Source: <a href="http://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html#getBean-java.lang.String-java.lang.Class-" rel="nofollow">http://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html#getBean-java.lang.String-java.lang.Class-</a></p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

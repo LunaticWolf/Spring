@@ -1,0 +1,94 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>083 Special Note about Destroy Lifecycle and Prototype Scope</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p>Here is a subtle point you need to be aware of with "prototype" scoped beans.</p>
+
+<p><strong>For "prototype" scoped beans, Spring does not call the @PreDestroy method. Gasp!</strong></p>
+
+
+
+
+
+
+
+
+
+<p>I didn't know this either until I dug through the Spring reference manual researching a student's question.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Here is the answer from the Spring reference manual. Section 7.5.2</p><p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-factory-scopes-prototype" rel="noopener noreferrer" target="_blank">https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-factory-scopes-prototype</a><br></p><p>---
+
+
+
+
+
+
+
+
+
+
+</p><p><em class="redactor-inline-converted"><strong class="redactor-inline-converted">In contrast to the other scopes, Spring does not manage the complete lifecycle of a<br>prototype bean</strong>: the container instantiates, configures, and otherwise assembles a<br>prototype object, and hands it to the client, with no further record of that prototype<br>instance. </em><em class="redactor-inline-converted"><br></em></p>
+
+
+
+
+
+
+
+<p><em class="redactor-inline-converted">Thus, although initialization lifecycle callback methods are called on all objects regardless of scope, <strong class="redactor-inline-converted">in the case of prototypes, configured destruction lifecycle callbacks are not called</strong>. The client code must clean up prototype-scoped objects and release expensive resources that the prototype bean(s) are holding.</em></p>
+
+
+
+
+
+
+
+<p><em class="redactor-inline-converted">To get the Spring container to release resources held by prototype-scoped beans, try using a custom <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-factory-extension-bpp" rel="nofollow">bean post-processor</a>, which holds a reference to beans that need to be cleaned up.<br></em></p>
+
+
+
+
+
+<p><em class="redactor-inline-converted">---<br></em></p>
+
+
+
+
+
+<p><em class="redactor-inline-converted"></em>This also applies to XML configuration.<br></p>
+
+
+
+
+
+<p><em class="redactor-inline-converted"><br></em></p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

@@ -1,0 +1,101 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>050 Special Note about Destroy Lifecycle and Prototype Scope</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p>There is a subtle point you need to be aware of with "prototype" scoped beans.</p>
+
+<p><strong>For "prototype" scoped beans, Spring does not call the destroy method. Gasp!</strong></p><br><p>---
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><em><strong>In contrast to the other scopes, Spring does not manage the complete lifecycle of a
+prototype bean</strong>: the container instantiates, configures, and otherwise assembles a
+prototype object, and hands it to the client, with no further record of that prototype
+instance. </em><em>
+</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><em>Thus, although initialization lifecycle callback methods are called on all objects regardless of scope, <strong>in the case of prototypes, configured destruction lifecycle callbacks are not called</strong>.
+ The client code must clean up prototype-scoped objects and release 
+expensive resources that the prototype bean(s) are holding.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><em><br></em></p>
+
+
+
+
+
+
+
+
+
+
+
+<p><em>---
+</em></p>
+
+
+
+
+
+
+
+
+
+
+
+<p>This also applies to both XML configuration and Annotation-based configuration.</p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>
