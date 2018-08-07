@@ -1,0 +1,691 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>451 Bonus Lecture Adding Spring Security to CRM App</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <h4>Bonus Lecture: Adding Spring Security to CRM App</h4>
+
+<p>In this lecture, we'll learn how to integrate our CRM app with Spring Security.</p>
+
+<p><strong>Goals</strong><br>- Add login page to CRM app<br>- Restrict URL access based on roles<br>- Display content based on roles</p>
+
+
+
+<p><strong>Technical Approach</strong><br>- Use Spring all Java configuration (no xml)<br>- Use Maven for project dependency management</p>
+
+
+
+<p>===</p>
+
+<p><strong>Security Integration</strong></p>
+
+<p><strong></strong></p><strong>
+
+</strong><p><strong></strong>Our CRM app will have a new login page. Only users with valid id/passwords will be able to login. The app will also restrict access based on roles. </p>
+
+
+
+<p>Employee role: users in this role will only be allowed to list customers. </p>
+
+
+
+<p>Manager role: users in this role will be allowed to list, add and update customers.</p>
+
+
+
+<p>Admin role: users in this role will be allowed to list, add, update and delete customers.</p>
+
+
+
+<p>---</p>
+
+
+
+<p><strong>Full Source Code<br></strong></p>
+
+<p><strong></strong>The full source code is available at this link:<br><a href="http://www.luv2code.com/spring-crm-with-security" rel="nofollow">http://www.luv2code.com/spring-crm-with-security</a></p>
+
+
+
+<p>In the following sections, I'll walk through the source code and explain how it works.</p>
+
+<p>---</p>
+
+<p><strong>Overview</strong><br></p><p><strong></strong>1. Download and Import the code</p>
+
+
+
+<p>2. Maven POM file</p>
+
+
+
+<p>3. Database configuration file</p>
+
+
+
+<p>4. Spring MVC Web Configuration Java code (all java, no xml)</p>
+
+
+
+<p>5. Spring Security Configuration Java code (all java, no xml)</p>
+
+
+
+<p>6. Display content based based on roles</p>
+
+
+
+<p>---</p>
+
+<p><strong>Details</strong></p>
+
+<p><strong></strong></p><strong>
+
+</strong><p><strong></strong><strong>1. Download and Import the code</strong></p>
+
+<p><strong></strong></p><strong>
+
+</strong><p><strong></strong>The code is provided as a full Maven project and you can easily import it into Eclipse. </p>
+
+
+
+<p>To import the code to Eclipse:<br>1. If you haven't done so already, download from: <a href="http://www.luv2code.com/spring-crm-with-security" rel="nofollow">http://www.luv2code.com/spring-crm-with-security</a><br>2. Unzip the file<br>3. In Eclipse, select Import &gt; Existing Maven Projects ...<br>4. Browse to directory where you unzipped the code.<br>5. Click ok buttons etc to import code</p>
+
+
+
+<p>Review the project structure.</p>
+
+
+
+<p>Make note of the following directories</p>
+
+
+
+<p>/src/main/java: contains the main java code<br>/src/main/resources: contains the database configuration file<br>/src/main/webapp: contains the web files (jsp, css etc)</p>
+
+<p>---<br></p>
+
+
+
+<p><strong>2. Maven POM file</strong></p>
+
+
+
+<p>The Maven POM file, pom.xml contains the dependencies required for this project. Here's a snippet of the dependencies section</p>
+
+
+
+<p> &lt;dependencies&gt;</p>
+
+
+
+<p>  &lt;!-- Spring MVC support --&gt;<br>  &lt;dependency&gt;<br>   &lt;groupId&gt;org.springframework&lt;/groupId&gt;<br>   &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;<br>   &lt;version&gt;${springframework.version}&lt;/version&gt;<br>  &lt;/dependency&gt;</p>
+
+
+
+<p>  &lt;!-- Spring Security --&gt;<br>  &lt;!-- spring-security-web and spring-security-config --&gt;<br>  <br>  &lt;dependency&gt;<br>   &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;<br>   &lt;artifactId&gt;spring-security-web&lt;/artifactId&gt;<br>   &lt;version&gt;${springsecurity.version}&lt;/version&gt;<br>  &lt;/dependency&gt;<br>  <br>  &lt;dependency&gt;<br>   &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;<br>   &lt;artifactId&gt;spring-security-config&lt;/artifactId&gt;<br>   &lt;version&gt;${springsecurity.version}&lt;/version&gt;<br>  &lt;/dependency&gt; <br>  <br>  &lt;!-- Add Spring Security Taglibs support --&gt;<br>  &lt;dependency&gt;<br>   &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;<br>   &lt;artifactId&gt;spring-security-taglibs&lt;/artifactId&gt;<br>   &lt;version&gt;${springsecurity.version}&lt;/version&gt;<br>  &lt;/dependency&gt; <br>  <br>  <br>  &lt;!-- Servlet, JSP and JSTL support --&gt;<br>  &lt;dependency&gt;<br>   &lt;groupId&gt;javax.servlet&lt;/groupId&gt;<br>   &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;<br>   &lt;version&gt;3.1.0&lt;/version&gt;<br>  &lt;/dependency&gt;</p>
+
+
+
+<p>  &lt;dependency&gt;<br>   &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;<br>   &lt;artifactId&gt;javax.servlet.jsp-api&lt;/artifactId&gt;<br>   &lt;version&gt;2.3.1&lt;/version&gt;<br>  &lt;/dependency&gt;</p>
+
+
+
+<p>  &lt;dependency&gt;<br>   &lt;groupId&gt;javax.servlet&lt;/groupId&gt;<br>   &lt;artifactId&gt;jstl&lt;/artifactId&gt;<br>   &lt;version&gt;1.2&lt;/version&gt;<br>  &lt;/dependency&gt;</p>
+
+
+
+<p>  &lt;dependency&gt;<br>   &lt;groupId&gt;junit&lt;/groupId&gt;<br>   &lt;artifactId&gt;junit&lt;/artifactId&gt;<br>   &lt;version&gt;3.8.1&lt;/version&gt;<br>   &lt;scope&gt;test&lt;/scope&gt;<br>  &lt;/dependency&gt;</p>
+
+
+
+<p> &lt;!-- Spring Transactions --&gt;<br> &lt;dependency&gt;<br> &lt;groupId&gt;org.springframework&lt;/groupId&gt;<br> &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;<br> &lt;version&gt;${springframework.version}&lt;/version&gt;<br> &lt;/dependency&gt;<br> <br> &lt;!-- Spring ORM --&gt;<br> &lt;dependency&gt;<br> &lt;groupId&gt;org.springframework&lt;/groupId&gt;<br> &lt;artifactId&gt;spring-orm&lt;/artifactId&gt;<br> &lt;version&gt;${springframework.version}&lt;/version&gt;<br> &lt;/dependency&gt;</p>
+
+
+
+<p>  &lt;!-- Hibernate Core --&gt;<br>  &lt;dependency&gt;<br>   &lt;groupId&gt;org.hibernate&lt;/groupId&gt;<br>   &lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;<br>   &lt;version&gt;${hibernate.version}&lt;/version&gt;<br>  &lt;/dependency&gt;</p>
+
+
+
+<p> &lt;!-- MySQL --&gt;<br> &lt;dependency&gt;<br> &lt;groupId&gt;mysql&lt;/groupId&gt;<br> &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;<br> &lt;version&gt;${mysql.connector.version}&lt;/version&gt;<br> &lt;/dependency&gt;<br><br> &lt;!-- C3PO --&gt;<br> &lt;dependency&gt;<br> &lt;groupId&gt;com.mchange&lt;/groupId&gt;<br> &lt;artifactId&gt;c3p0&lt;/artifactId&gt;<br> &lt;version&gt;${c3po.version}&lt;/version&gt;<br> &lt;/dependency&gt;</p>
+
+
+
+<p>  &lt;!-- to compensate for java 9 not including jaxb --&gt;<br>  &lt;dependency&gt;<br>   &lt;groupId&gt;javax.xml.bind&lt;/groupId&gt;<br>   &lt;artifactId&gt;jaxb-api&lt;/artifactId&gt;<br>   &lt;version&gt;2.3.0&lt;/version&gt;<br>  &lt;/dependency&gt;</p>
+
+
+
+<p> &lt;/dependencies&gt;</p>
+
+<p>---<br></p>
+
+
+
+
+
+<p><strong>3. Database configuration file</strong></p>
+
+
+
+<p>The database configuration file is located at /src/main/resources/persistence-mysql.properties</p>
+
+
+
+<p>When Maven performs a build, this file is copied with the WEB-INF/classes directory. We'll configure our Spring code to read this file from the classpath. The code will use information from this file to set up the database connection pool.</p>
+
+
+
+<p>File: persistence-mysql.properties</p>
+
+
+
+<p>#<br># JDBC connection properties<br>#<br>jdbc.driver=com.mysql.jdbc.Driver<br>jdbc.url=jdbc:mysql://localhost:3306/web_customer_tracker?useSSL=false<br>jdbc.user=springstudent<br>jdbc.password=springstudent</p>
+
+
+
+<p>#<br># Connection pool properties<br>#<br>connection.pool.initialPoolSize=5<br>connection.pool.minPoolSize=5<br>connection.pool.maxPoolSize=20<br>connection.pool.maxIdleTime=3000</p>
+
+
+
+<p>#<br># Hibernate properties<br>#<br>hibernate.dialect=org.hibernate.dialect.MySQLDialect<br>hibernate.show_sql=true<br>hiberante.packagesToScan=com.luv2code.springdemo.entity</p>
+
+<p>---<br></p>
+
+
+
+<p><strong>4. Spring MVC Web Configuration Java code (all java, no xml)</strong></p>
+
+
+
+<p>Instead of using web.xml to boostrap the Spring MVC configuration. We'll make use of pure Java. This code is contained in the following files:</p>
+
+
+
+<p>package: com.luv2code.springdemo.config</p>
+
+
+
+<p>File:<br>MySpringMvcDispatcherServletInitializer</p>
+
+
+
+<p>This file specifies the configuration for the application. It also maps the Spring MVC dispatcher servlet to the root path.</p>
+
+
+
+<p> @Override<br> protected Class&lt;?&gt;[] getServletConfigClasses() {<br>  return new Class[] { DemoAppConfig.class };<br> }</p>
+
+
+
+<p> @Override<br> protected String[] getServletMappings() {<br>  return new String[] { "/" };<br> }</p>
+
+
+
+<p>I explained this file in detail earlier in the course. If you need a refresh, please see this video.</p>
+
+
+
+<p>Section 47, Video 400<br>https://www.udemy.com/spring-hibernate-tutorial/learn/v4/t/lecture/8355872?start=0</p>
+
+
+
+
+
+<p>---</p>
+
+<p>package: com.luv2code.springdemo.config</p>
+
+
+
+<p>File:<br>DemoAppConfig.java</p>
+
+
+
+<p>The DemoAppConfig.java contains the configuration for the various beans needs for Hibernate DB access. This code was traditionally in a single xml file, spring-mvc-crud-servlet.xml. </p>
+
+
+
+<p>At the beginning of the file, there are annotations for configuration</p>
+
+
+
+<p>@Configuration<br>@EnableWebMvc<br>@EnableTransactionManagement<br>@ComponentScan("com.luv2code.springdemo")<br>@PropertySource({ "classpath:persistence-mysql.properties" })<br>public class DemoAppConfig implements WebMvcConfigurer {</p>
+
+
+
+<p>...</p>
+
+
+
+<p>}</p>
+
+
+
+<p>@Configuration: tells Spring this is a configuration class</p>
+
+
+
+<p>@EnableWebMvc: is similar to the XML config &lt;mvc:annotation-driven /&gt;</p>
+
+
+
+<p>@EnableTransactionManagement: adds transaction manager support</p>
+
+
+
+<p>@ComponentScan("com.luv2code.springdemo"): where to scan for components, recursively</p>
+
+
+
+<p>@PropertySource({ "classpath:persistence-mysql.properties" }): <br>the configuration file to load. we'll use this to load the database configuration file from the classpath. As mentioned earlier, when Maven performs a build, the properties is copied with the WEB-INF/classes directory. The WEB-INF/classes directory is one of the classpath directories for Java web apps.</p>
+
+
+
+<p>Note: I explained @Configuration, @EnableWebMvc and @ComponentScan earlier in the course. If you need a refresh, please see this video.</p>
+
+
+
+<p>Section 47, Video 399<br>https://www.udemy.com/spring-hibernate-tutorial/learn/v4/t/lecture/8355870?start=0</p>
+
+
+
+<p>---</p>
+
+
+
+<p>Ok, let's continue to walk through the code.</p>
+
+
+
+<p>We have this snippet code </p>
+
+
+
+<p> @Autowired<br> private Environment env;</p>
+
+
+
+<p>This is a special helper class provided by Spring. The Environment object, env, will be loaded with the properties file from the annotation: @PropertySource({ "classpath:persistence-mysql.properties" })</p>
+
+
+
+<p>We'll use this later in the class to read the configs for JDBC, Hibernate and connection pooling.</p>
+
+
+
+<p>---</p>
+
+
+
+<p>Next we define code for a view resolver. this is similar to what we had in the XML world.</p>
+
+
+
+<p> // define a bean for ViewResolver</p>
+
+
+
+<p> @Bean<br> public ViewResolver viewResolver() {<br>  <br>  InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();<br>  <br>  viewResolver.setPrefix("/WEB-INF/view/");<br>  viewResolver.setSuffix(".jsp");<br>  <br>  return viewResolver;<br> }</p>
+
+
+
+<p>---</p>
+
+
+
+<p>Next, we write code to create the datasource bean. This code reads the Environment env object to get the data. It then uses the data from env to set up configs for JDBC and connection pooling</p>
+
+
+
+<p> @Bean<br> public DataSource myDataSource() {<br>  <br>  // create connection pool<br>  ComboPooledDataSource myDataSource = new ComboPooledDataSource();</p>
+
+
+
+<p>  // set the jdbc driver<br>  try {<br>   myDataSource.setDriverClass("com.mysql.jdbc.Driver");  <br>  }<br>  catch (PropertyVetoException exc) {<br>   throw new RuntimeException(exc);<br>  }<br>  <br>  // for sanity's sake, let's log url and user ... just to make sure we are reading the data<br>  logger.info("jdbc.url=" + env.getProperty("jdbc.url"));<br>  logger.info("jdbc.user=" + env.getProperty("jdbc.user"));<br>  <br>  // set database connection props<br>  myDataSource.setJdbcUrl(env.getProperty("jdbc.url"));<br>  myDataSource.setUser(env.getProperty("jdbc.user"));<br>  myDataSource.setPassword(env.getProperty("jdbc.password"));<br>  <br>  // set connection pool props<br>  myDataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("connection.pool.initialPoolSize")));<br>  myDataSource.setMinPoolSize(Integer.parseInt(env.getProperty("connection.pool.minPoolSize")));<br>  myDataSource.setMaxPoolSize(Integer.parseInt(env.getProperty("connection.pool.maxPoolSize")));  <br>  myDataSource.setMaxIdleTime(Integer.parseInt(env.getProperty("connection.pool.maxIdleTime")));</p>
+
+
+
+<p>  return myDataSource;<br> }</p>
+
+
+
+<p>--</p>
+
+
+
+<p>The next method handle the Hibernate properties.</p>
+
+
+
+<p> private Properties getHibernateProperties() {</p>
+
+
+
+<p>  // set hibernate properties<br>  Properties props = new Properties();</p>
+
+
+
+<p>  props.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));<br>  props.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));<br>  <br>  return props;    <br> }</p>
+
+
+
+<p>---</p>
+
+
+
+<p>The next method creates the Hibernate session factory based on the datasource and configuration properties</p>
+
+
+
+<p> @Bean<br> public LocalSessionFactoryBean sessionFactory(){<br>  <br>  // create session factorys<br>  LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();<br>  <br>  // set the properties<br>  sessionFactory.setDataSource(myDataSource());<br>  sessionFactory.setPackagesToScan(env.getProperty("hiberante.packagesToScan"));<br>  sessionFactory.setHibernateProperties(getHibernateProperties());<br>  <br>  return sessionFactory;<br> }</p>
+
+
+
+<p>---</p>
+
+
+
+<p>The next method configures the Hibernate transaction manager.</p>
+
+
+
+<p> @Bean<br> @Autowired<br> public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {<br>  <br>  // setup transaction manager based on session factory<br>  HibernateTransactionManager txManager = new HibernateTransactionManager();<br>  txManager.setSessionFactory(sessionFactory);</p>
+
+
+
+<p>  return txManager;<br> } </p>
+
+
+
+<p>---</p>
+
+
+
+<p>Finally, the app is going to use static web resources such as css, images, js etc. So we add a resource handler.</p>
+
+
+
+<p> @Override<br> public void addResourceHandlers(ResourceHandlerRegistry registry) {<br> registry<br> .addResourceHandler("/resources/**")<br> .addResourceLocations("/resources/"); <br> } </p>
+
+
+
+
+
+<p>---</p>
+
+<p><strong>5. Spring Security Configuration Java code (all java, no xml)</strong></p>
+
+<p><strong></strong></p><strong>
+
+</strong><p><strong></strong><br></p><p><strong></strong>Next, we need to configure Spring security. There are two important classes. DemoSecurityConfig.java and SecurityWebApplicationInitializer.java</p>
+
+
+
+<p>package: com.luv2code.springdemo.config</p>
+
+
+
+<p>File:<br>SecurityWebApplicationInitializer</p>
+
+
+
+<p>This file is required in order to register the Spring Security filters. We covered this in the Spring Security section. No changes to this file:</p>
+
+
+
+<p>package com.luv2code.springdemo.config;</p>
+
+
+
+<p>import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;</p>
+
+
+
+<p>public class SecurityWebApplicationInitializer <br>      extends AbstractSecurityWebApplicationInitializer {</p>
+
+
+
+<p>}</p>
+
+
+
+<p>--</p>
+
+
+
+<p>package: com.luv2code.springdemo.config</p>
+
+
+
+<p>File:<br>DemoSecurityConfig.java</p>
+
+
+
+<p>This file configures our users and also restricts access to the app based on roles. This file mostly the same from previous spring security videos. There are just minor changes on which URLs to restrict access for.</p>
+
+
+
+<p>To keep things simple, we'll make use in-memory configuration</p>
+
+
+
+<p>@Configuration<br>@EnableWebSecurity<br>public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {</p>
+
+
+
+<p> @Override<br> protected void configure(AuthenticationManagerBuilder auth) throws Exception {</p>
+
+
+
+<p>  // add our users for in memory authentication<br>  <br>  UserBuilder users = User.withDefaultPasswordEncoder();<br>  <br>  auth.inMemoryAuthentication()<br>   .withUser(users.username("john").password("test123").roles("EMPLOYEE"))<br>   .withUser(users.username("mary").password("test123").roles("EMPLOYEE", "MANAGER"))<br>   .withUser(users.username("susan").password("test123").roles("EMPLOYEE", "ADMIN"));<br> }</p>
+
+
+
+<p>---</p>
+
+
+
+<p>Then, we'll restrict access to users based on roles. </p>
+
+
+
+<p>In this app, to make things exciting, we have the following app requirements:</p>
+
+
+
+<p>- Employee role: users in this role will only be allowed to list customers. </p>
+
+
+
+<p>- Manager role: users in this role will be allowed to list, add and update customers.</p>
+
+
+
+<p>- Admin role: users in this role will be allowed to list, add, update and delete customers.</p>
+
+
+
+<p>So, these requirements translated into the following code</p>
+
+
+
+<p> @Override<br> protected void configure(HttpSecurity http) throws Exception {</p>
+
+
+
+<p>  http.authorizeRequests()<br>   .antMatchers("/customer/showForm*").hasAnyRole("MANAGER", "ADMIN")<br>   .antMatchers("/customer/save*").hasAnyRole("MANAGER", "ADMIN")<br>   .antMatchers("/customer/delete").hasRole("ADMIN")<br>   .antMatchers("/customer/**").hasRole("EMPLOYEE")<br>   .antMatchers("/resources/**").permitAll()<br>   .and()<br>   .formLogin()<br>    .loginPage("/showMyLoginPage")<br>    .loginProcessingUrl("/authenticateTheUser")<br>    .permitAll()<br>   .and()<br>   .logout().permitAll()<br>   .and()<br>   .exceptionHandling().accessDeniedPage("/access-denied");<br>  <br> }</p>
+
+
+
+<p>The ordering of antMatchers is important. You should list the most specific url patterns first and then add the more general patterns later. If you don't follow this approach, then you will not have proper access restrictions. </p>
+
+
+
+<p>Everything else remains the same for login/logout etc.</p>
+
+
+
+<p>---</p>
+
+
+
+<p><strong>6. Display content based based on roles</strong></p>
+
+<p><strong></strong></p><strong>
+
+</strong><p><strong></strong><br></p><p><strong></strong>Based on the previous security configs in the CRM app, only certain users can perform certain operations such as Add, Update and Delete. </p>
+
+
+
+<p>So we can change the view page to only display content based on the user roles.</p>
+
+
+
+<p>For example, the view page list-customers.jsp</p>
+
+
+
+<p>Only show the "Add Customer" button, if the user is a manager or admin.</p>
+
+
+
+<p>We can make use of this code:</p>
+
+
+
+<p> &lt;security:authorize access="hasAnyRole('MANAGER', 'ADMIN')"&gt;</p>
+
+
+
+<p>  &lt;!-- put new button: Add Customer --&gt;</p>
+
+
+
+<p>  &lt;input type="button" value="Add Customer"<br>    onclick="window.location.href='showFormForAdd'; return false;"<br>    class="add-button"<br>  /&gt;</p>
+
+
+
+<p> &lt;/security:authorize&gt;</p>
+
+
+
+<p>Only show the "Update" link, if the user is a manager or admin. </p>
+
+
+
+<p> &lt;security:authorize access="hasAnyRole('MANAGER', 'ADMIN')"&gt;<br>  &lt;!-- display the update link --&gt;<br>  &lt;a href="${updateLink}"&gt;Update&lt;/a&gt;<br> &lt;/security:authorize&gt;</p>
+
+
+
+
+
+<p>Only show the "Delete" link, if the user is an admin. </p>
+
+
+
+<p>Here's the code</p>
+
+
+
+<p> &lt;security:authorize access="hasAnyRole('ADMIN')"&gt;<br>  &lt;a href="${deleteLink}"<br>   onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false"&gt;Delete&lt;/a&gt;<br> &lt;/security:authorize&gt;</p>
+
+
+
+<p>---</p>
+
+
+
+<p>I'm assuming that you were able to run the CRM app earlier in the course and you were able to run the Spring Security simple web examples.</p>
+
+
+
+<p>If so, then you can run the application on your server. Everything is ready to go!</p>
+
+
+
+<p>---</p>
+
+
+
+<p>This section just contains details on which files are new and which ones remained the same.</p>
+
+
+
+<p>Files</p>
+
+
+
+<p>Here's a list of files that were added to CRM project for all Java Configuration (no xml)</p>
+
+
+
+<p>Java Configuration (no xml)</p>
+
+
+
+<p>src/main/java/com/luv2code/springdemo/config<br>- DemoAppConfig.java<br>- MySpringMvcDispatcherServletInitializer.java</p>
+
+
+
+<p>Properties file<br>/src/main/resources/persistence-mysql.properties</p>
+
+
+
+<p>Here's a list of files that were added to CRM project for Spring security</p>
+
+
+
+<p>Spring Security Configuration</p>
+
+
+
+<p>src/main/java/com/luv2code/springdemo/config<br>- DemoSecurityConfig.java<br>- SecurityWebApplicationInitializer</p>
+
+
+
+<p>Spring Security LoginController<br>src/main/java/com/luv2code/springdemo/controller</p>
+
+
+
+<p>View pages<br>src/main/webapp/WEB-INF/view<br>- fancy-login.jsp<br>- access-denied.jsp</p>
+
+
+
+<p>---</p>
+
+
+
+<p>No changes were made to: entity, dao, service, CustomerController</p>
+
+
+
+<p>---</p>
+
+
+
+<p>Full Source Code<br>The full source code is available at this link:<br><a href="http://www.luv2code.com/spring-crm-with-security" rel="nofollow">http://www.luv2code.com/spring-crm-with-security</a></p>
+
+
+
+<p>---</p>
+
+
+
+<p>That's it!</p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>
